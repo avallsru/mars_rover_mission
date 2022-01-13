@@ -9,7 +9,10 @@
   
 }
 
-.square {
+.square,
+.obstacle,
+.robot,
+.test {
   height: 20px;
   width: 20px;
   border: 1px solid black;
@@ -18,7 +21,32 @@
     background-color: blue;
   }
   &.robot {
-    background-color: green;
+    width: 0; 
+    height: 0; 
+    &.north {
+      border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 21px solid purple;
+    }
+    &.south {
+      border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 21px solid purple;
+    }
+    &.east {
+      border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 21px solid purple;
+    }
+    &.west {
+      border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 21px solid purple;
+    }
+    
+  }
+  &.test {
+    background-color: pink;
   }
   &:hover {
     background-color: red;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {obstacles} from './obstacles.jsx';
 import {Robot} from "./Robot";
@@ -9,48 +9,64 @@ const Planet = () => {
   let totalColumns = 10;
   let totalRows = 10;
   let planetMap= [];
+  const [robotToPrint, setRobotToPrint] = useState([]);
+  // const [mapToPrint, setMapToPrint] = useState([])
+
+  useEffect(() => {
+    let obstacleToPrint;
+    for(let obstaclePosition of obstacles) {
+      obstacleToPrint = document.getElementById(`${obstaclePosition[0]},${obstaclePosition[1]}`)
+      obstacleToPrint.classList= "square obstacle";      
+    }
+    let robotCoords = Robot()
+    let robot = document.getElementById(`${robotCoords[0]},${robotCoords[1]}`)
+    robot.classList = "square robot west";
+  }, [])
 
   for(let indexColumn = 0; indexColumn < totalColumns; indexColumn++) {
     let row = []
     for (let indexRow = totalRows-1; indexRow >= 0; indexRow--) {
-      let coord = {
-        coords:[indexColumn, indexRow],
+      let mapPlace = {
+        x: indexColumn,
+        y: indexRow,
+        coord:[indexColumn, indexRow],
         state:"empty"
       }
-      row.push(coord)
+      row.push(mapPlace)
     }
     planetMap.push(row)
+    
   }
 
-  function isObstacle(coords) {
-    for(let obstaclePosition of obstacles) {
-      if(coords[0] === obstaclePosition[0] && coords[1] === obstaclePosition[1]) return true;
-    }
-    return false;
-  }
+  
 
-  function cellClass(cellCoords) {
-    console.log(Robot
-      )
-    for(let obstaclePosition of obstacles) {
-      if(cellCoords[0] === obstaclePosition[0] && cellCoords[1] === obstaclePosition[1]){
-        return "square obstacle"
-      } else if(cellCoords[0] === Robot[0] && cellCoords[1] === Robot[1]){
-        return "square robot"
-      }
+  // let robotCoords = Robot();
+
+  // function cellClass(xCoord, yCoord) {    
+  //   for(let obstaclePosition of obstacles) {
+  //     if(xCoord === obstaclePosition[0] && yCoord=== obstaclePosition[1]){
+  //       return "square obstacle"
+  //     } else if(xCoord === robotCoords[0] && yCoord=== robotCoords[1]){
+  //       return "square robot"
+  //     }
       
-    }
-    return "square"
-  }
+  //   }
+  //   return "square"
+  // }
+
     
   let mapToPrint = planetMap.map(row => {
     return(
       <div>
         {
           row.map(cell => {
-            let obstaclePosition = isObstacle(cell.coords);
             return(
-              <button className = {cellClass(cell.coords)} key={cell.coords} id={cell.coords} ></button>
+              <div 
+                // className = {cellClass(cell.x, cell.y)} 
+                className="square"
+                key={cell.coords} 
+                id={`${cell.x},${cell.y}`}
+               />
             )
           })
         }
