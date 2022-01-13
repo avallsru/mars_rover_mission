@@ -1,0 +1,27 @@
+
+
+.planet {
+  margin: 10% 20%;
+  display: grid;
+  grid-template-columns: repeat(10, 20px );
+  grid-template-rows: repeat(10, 20px );
+  border: 1px solid black;
+  
+}
+
+.square {
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+  
+  &.obstacle {
+    background-color: blue;
+  }
+  &.robot {
+    background-color: green;
+  }
+  &:hover {
+    background-color: red;
+  }
+  
+}
