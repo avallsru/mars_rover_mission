@@ -1,6 +1,6 @@
-import { obstacles } from "../Components/PlanetMap/obstacles";
+const obstacles = require("../Components/PlanetMap/obstacles");
 
-export function robotMovement(command, xCoord, yCoord, direction) {
+function robotMovement(command, xCoord, yCoord, direction) {
   let robotPosition = { x: xCoord, y: yCoord };
   let newPosition;
 
@@ -44,7 +44,10 @@ export function robotMovement(command, xCoord, yCoord, direction) {
     return robotPosition;
   }
 
-  return newPosition;
+  //change direction
+  let newDirection = changeDirection(direction, command);
+
+  return { newPosition, newDirection };
 }
 
 function checkObstacles({ x, y }) {
@@ -66,3 +69,33 @@ function checkMapBoundaries({ x, y }) {
   }
   return false;
 }
+
+function changeDirection(direction, command) {
+  if (
+    (direction === "north" && command === "f") ||
+    (direction === "east" && command === "l") ||
+    (direction === "west" && command === "r")
+  ) {
+    return "north";
+  } else if (
+    (direction === "north" && command === "r") ||
+    (direction === "east" && command === "f") ||
+    (direction === "south" && command === "l")
+  ) {
+    return "east";
+  } else if (
+    (direction === "north" && command === "l") ||
+    (direction === "south" && command === "r") ||
+    (direction === "west" && command === "f")
+  ) {
+    return "west";
+  } else if (
+    (direction === "south" && command === "f") ||
+    (direction === "east" && command === "r") ||
+    (direction === "west" && command === "l")
+  ) {
+    return "south";
+  }
+}
+
+module.exports = robotMovement;

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { obstacles } from "./obstacles.jsx";
+// import { obstacles } from "./obstacles.jsx";
 import { robotMovement } from "../../logic/movements";
 
 import "./planet.scss";
+
+const obstacles = require("./obstacles.jsx");
 
 const Planet = () => {
   const dispatch = useDispatch();
@@ -16,16 +18,6 @@ const Planet = () => {
   );
   const [robotToPrint, setRobotToPrint] = useState([]);
   // const [mapToPrint, setMapToPrint] = useState([])
-
-  useEffect(() => {
-    let obstacleToPrint;
-    for (let obstaclePosition of obstacles) {
-      obstacleToPrint = document.getElementById(
-        `${obstaclePosition[0]},${obstaclePosition[1]}`
-      );
-      obstacleToPrint.className += " obstacle";
-    }
-  }, []);
 
   useEffect(() => {
     planetMap = [];
@@ -53,7 +45,7 @@ const Planet = () => {
         break;
       }
     }
-  }, [xCoord, yCoord]);
+  }, [xCoord, yCoord, direction]);
 
   function defineObstacles() {
     let obstacleToPrint;
@@ -79,23 +71,9 @@ const Planet = () => {
     planetMap.push(row);
   }
 
-  // let robotCoords = Robot();
-
-  // function cellClass(xCoord, yCoord) {
-  //   for(let obstaclePosition of obstacles) {
-  //     if(xCoord === obstaclePosition[0] && yCoord=== obstaclePosition[1]){
-  //       return "square obstacle"
-  //     } else if(xCoord === robotCoords[0] && yCoord=== robotCoords[1]){
-  //       return "square robot"
-  //     }
-
-  //   }
-  //   return "square"
-  // }
-
   let mapToPrint = planetMap.map((row) => {
     return (
-      <div key={Math.random()}>
+      <div key={Math.random() * Date.now()}>
         {row.map((cell) => {
           return (
             <div
@@ -103,7 +81,7 @@ const Planet = () => {
               className="square"
               key={cell.coords}
               id={`${cell.x},${cell.y}`}
-            >{`${cell.x},${cell.y}`}</div>
+            />
           );
         })}
       </div>

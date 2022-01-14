@@ -1,4 +1,4 @@
-export const obstacles = [
+const obstacles = [
   [7, 9],
   [7, 8],
   [9, 2],
@@ -8,3 +8,5 @@ export const obstacles = [
   [1, 1],
   [0, 1],
 ];
+
+module.exports = obstacles;
