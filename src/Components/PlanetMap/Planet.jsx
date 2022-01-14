@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 import {obstacles} from './obstacles.jsx';
 import {Robot} from "./Robot";
@@ -6,21 +7,47 @@ import {Robot} from "./Robot";
 import "./planet.scss";
 
 const Planet = () => {
+  const dispatch = useDispatch();
   let totalColumns = 10;
   let totalRows = 10;
   let planetMap= [];
+  const direction = useSelector(store => store.robotsReducers.direction);
+  console.log(direction)
   const [robotToPrint, setRobotToPrint] = useState([]);
   // const [mapToPrint, setMapToPrint] = useState([])
 
   useEffect(() => {
     let obstacleToPrint;
+    
     for(let obstaclePosition of obstacles) {
       obstacleToPrint = document.getElementById(`${obstaclePosition[0]},${obstaclePosition[1]}`)
-      obstacleToPrint.classList= "square obstacle";      
+      obstacleToPrint.className += " obstacle";  
+      console.log(obstacleToPrint.className);    
     }
     let robotCoords = Robot()
     let robot = document.getElementById(`${robotCoords[0]},${robotCoords[1]}`)
-    robot.classList = "square robot west";
+    robot.className += " robot";
+    switch(direction) {
+      case "north": {
+        robot.className += " north";
+        break;
+      }
+      case "south": {
+        robot.className += " south";
+        break;
+      }
+      case "east": {
+        robot.className += " east";
+        break;
+      }
+      case "west": {
+        robot.className += " west";
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }, [])
 
   for(let indexColumn = 0; indexColumn < totalColumns; indexColumn++) {
