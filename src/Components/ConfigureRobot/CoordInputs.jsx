@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { setInitialCoords } from "../../redux/actions/robotActions";
 
 const CoordInputs = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
@@ -18,6 +21,7 @@ const CoordInputs = () => {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(setInitialCoords(x, y));
+    navigate("/controller");
   }
 
   return (

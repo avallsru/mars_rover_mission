@@ -1,19 +1,19 @@
-import logo from "./logo.svg";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import CoordsInputs from "./Components/ConfigureRobot/CoordInputs";
-import DirectionSelector from "./Components/ConfigureRobot/DirectionSelector";
-import Planet from "./Components/PlanetMap/Planet.jsx";
-import CommandInput from "./Components/PlanetMap/CommandInput.jsx";
+import { Home, RoverController } from "./pages";
 
 // import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <CoordsInputs />
-      <DirectionSelector />
-      <Planet />
-      <CommandInput />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/controller" element={<RoverController />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
