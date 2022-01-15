@@ -36,19 +36,18 @@ function robotMovement(command, xCoord = 0, yCoord = 0, direction) {
 
   let boundaries = checkMapBoundaries(newPosition);
   let obstacle = checkObstacles(newPosition);
+  //change direction
+  let newDirection = changeDirection(direction, command);
 
   if (boundaries) {
-    alert("you're trying to go outside the map!");
+    status = "boundaries";
+    newPosition = robotPosition;
+    // newDirection = direction;
     // return robotPosition;
   } else if (obstacle) {
-    // alert("ops!, you've found an obstacle");
-
     newPosition = robotPosition;
     status = "obstacle";
   }
-
-  //change direction
-  let newDirection = changeDirection(direction, command);
 
   return { newPosition, newDirection, status };
 }
