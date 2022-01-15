@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   Container,
@@ -20,12 +20,6 @@ const CustomizedAlert = ({ type }) => {
           <AlertIcon />
           <AlertTitle mr={2}>{selectedAlert.title}</AlertTitle>
           <AlertDescription>{selectedAlert.description}</AlertDescription>
-          {/* <CloseButton
-          onClick={() => setAlertVisibility(false)}
-          position="absolute"
-          right="8px"
-          top="8px"
-        /> */}
         </Alert>
       </Container>
     );

@@ -2,6 +2,7 @@ const robotMovement = require("./movements");
 
 function changeRobotPosition(commandsStr, originalX, originalY, originalDir) {
   let commandsArray = commandsStr.split("");
+
   let nextDir = originalDir;
   let nextXCoord = originalX;
   let nextYCoord = originalY;

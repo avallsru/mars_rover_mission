@@ -1,49 +1,42 @@
 const obstacles = require("../Components/PlanetMap/obstacles");
+const defineDirection = require("./defineDirection");
 
 function robotMovement(command, xCoord = 0, yCoord = 0, direction) {
   let robotPosition = { x: xCoord, y: yCoord };
-  let newPosition;
+  let newPosition = {};
   let status = "movement";
 
   //define new robot coordinates
-  if (
-    (direction === "north" && command === "f") ||
-    (direction === "east" && command === "l") ||
-    (direction === "west" && command === "r")
-  ) {
-    newPosition = { x: xCoord, y: yCoord + 1 };
-  } else if (
-    (direction === "north" && command === "r") ||
-    (direction === "east" && command === "f") ||
-    (direction === "south" && command === "l")
-  ) {
-    newPosition = { x: xCoord + 1, y: yCoord };
-  } else if (
-    (direction === "north" && command === "l") ||
-    (direction === "west" && command === "f") ||
-    (direction === "south" && command === "r")
-  ) {
-    newPosition = { x: xCoord - 1, y: yCoord };
-  } else if (
-    (direction === "east" && command === "r") ||
-    (direction === "west" && command === "l") ||
-    (direction === "south" && command === "f")
-  ) {
-    newPosition = { x: xCoord, y: yCoord - 1 };
+  let newDirection = defineDirection(direction, command);
+  switch (newDirection) {
+    case "north": {
+      newPosition = { x: xCoord, y: yCoord + 1 };
+      break;
+    }
+    case "east": {
+      newPosition = { x: xCoord + 1, y: yCoord };
+      break;
+    }
+    case "west": {
+      newPosition = { x: xCoord - 1, y: yCoord };
+      break;
+    }
+    case "south": {
+      newPosition = { x: xCoord, y: yCoord - 1 };
+      break;
+    }
+    default: {
+      break;
+    }
   }
 
   //check if movement is possible
-
   let boundaries = checkMapBoundaries(newPosition);
   let obstacle = checkObstacles(newPosition);
-  //change direction
-  let newDirection = changeDirection(direction, command);
 
   if (boundaries) {
     status = "boundaries";
     newPosition = robotPosition;
-    // newDirection = direction;
-    // return robotPosition;
   } else if (obstacle) {
     newPosition = robotPosition;
     status = "obstacle";
@@ -70,34 +63,6 @@ function checkMapBoundaries({ x, y }) {
     return true;
   }
   return false;
-}
-
-function changeDirection(direction, command) {
-  if (
-    (direction === "north" && command === "f") ||
-    (direction === "east" && command === "l") ||
-    (direction === "west" && command === "r")
-  ) {
-    return "north";
-  } else if (
-    (direction === "north" && command === "r") ||
-    (direction === "east" && command === "f") ||
-    (direction === "south" && command === "l")
-  ) {
-    return "east";
-  } else if (
-    (direction === "north" && command === "l") ||
-    (direction === "south" && command === "r") ||
-    (direction === "west" && command === "f")
-  ) {
-    return "west";
-  } else if (
-    (direction === "south" && command === "f") ||
-    (direction === "east" && command === "r") ||
-    (direction === "west" && command === "l")
-  ) {
-    return "south";
-  }
 }
 
 module.exports = robotMovement;

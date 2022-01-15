@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Input, Button } from "@chakra-ui/react";
 
-import { changeDirection, moveRobot } from "../../redux/actions/robotActions";
+import {
+  changeDirection,
+  moveRobot,
+  setPreviousRobot,
+} from "../../redux/actions/robotActions";
 
 import CustomizedAlert from "../Alert/CustomizedAlert";
 
@@ -41,7 +45,6 @@ const CommandInput = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const { xToGo, yToGo, newDir, status } = changeRobotPosition(
       commands,
       xCoord,

@@ -1,4 +1,4 @@
-const robotMovement = require("../logic/movements");
+const robotMovement = require("../../logic/movements");
 
 test("the robot should change the direction after a l/r movement", () => {
   let result = robotMovement("l", 5, 6, "east");
@@ -13,7 +13,12 @@ test("the robot should move to new coords after a movement", () => {
   expect(newPosition).toEqual({ x: 2, y: 0 });
 });
 
-// test("the robot should not move to new coords if there is an obstacle", () => {
-//   const { newPosition } = robotMovement("f", 0, 0, "north");
-//   expect(newPosition).toEqual({ x: 0, y: 0 });
-// });
+test("the robot should not move to new coords if there is an obstacle", () => {
+  const { newPosition } = robotMovement("r", 0, 2, "north");
+  expect(newPosition).toEqual({ x: 0, y: 2 });
+});
+
+test("the robot should not move to new coords if it arribes to map boundaries", () => {
+  const { newPosition } = robotMovement("l", 0, 0, "north");
+  expect(newPosition).toEqual({ x: 0, y: 0 });
+});

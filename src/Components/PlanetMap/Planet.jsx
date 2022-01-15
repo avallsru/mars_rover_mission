@@ -1,26 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-// import { obstacles } from "./obstacles.jsx";
-import { robotMovement } from "../../logic/movements";
+import mapSetUp from "../../logic/mapSetUp";
 
 import "./planet.scss";
 
 const obstacles = require("./obstacles.jsx");
 
 const Planet = () => {
-  const dispatch = useDispatch();
-  let totalColumns = 10;
-  let totalRows = 10;
-  let planetMap = [];
+  let mapToPrint = mapSetUp();
   const { direction, xCoord, yCoord } = useSelector(
     (store) => store.robotsReducers
   );
-  const [robotToPrint, setRobotToPrint] = useState([]);
-  // const [mapToPrint, setMapToPrint] = useState([])
 
   useEffect(() => {
-    planetMap = [];
     defineObstacles();
     let robot = document.getElementById(`${xCoord},${yCoord}`);
 
@@ -57,37 +50,6 @@ const Planet = () => {
       obstacleToPrint.className += " obstacle";
     }
   }
-
-  for (let indexColumn = 0; indexColumn < totalColumns; indexColumn++) {
-    let row = [];
-    for (let indexRow = totalRows - 1; indexRow >= 0; indexRow--) {
-      let mapPlace = {
-        x: indexColumn,
-        y: indexRow,
-        coord: [indexColumn, indexRow],
-        state: "empty",
-      };
-      row.push(mapPlace);
-    }
-    planetMap.push(row);
-  }
-
-  let mapToPrint = planetMap.map((row) => {
-    return (
-      <div key={Math.random() * Date.now()}>
-        {row.map((cell) => {
-          return (
-            <div
-              // className = {cellClass(cell.x, cell.y)}
-              className="square"
-              key={cell.coords}
-              id={`${cell.x},${cell.y}`}
-            />
-          );
-        })}
-      </div>
-    );
-  });
 
   return <div className="planet">{mapToPrint}</div>;
 };

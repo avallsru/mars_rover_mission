@@ -9,8 +9,6 @@ import CustomizedAlert from "../Alert/CustomizedAlert";
 
 import "../Alert/CustomizedAlerts.scss";
 
-// import "../Alert/Alert.scss";
-
 let totalLines = 10;
 const CoordInputs = () => {
   const dispatch = useDispatch();

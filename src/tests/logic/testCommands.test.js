@@ -1,4 +1,4 @@
-const testCommands = require("../logic/testCommands");
+const testCommands = require("../../logic/testCommands");
 
 test("should return true if the command line includes just f/r/l", () => {
   let command = "lrrllffflrf";
