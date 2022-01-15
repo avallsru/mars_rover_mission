@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { robotMovement } from "../../logic/movements";
+import {
+  Container,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  Input,
+  Button,
+} from "@chakra-ui/react";
+
 import {
   changeDirection,
   setPreviousRobot,
   moveRobot,
 } from "../../redux/actions/robotActions";
+
+const robotMovement = require("../../logic/movements");
 
 const CommandInput = () => {
   const dispatch = useDispatch();
@@ -14,49 +26,121 @@ const CommandInput = () => {
   );
   const [submitState, setSubmitState] = useState(false);
   const [commands, setCommands] = useState("");
+  const [commandAlert, setCommandAlert] = useState(false);
+  const [obstacleAlert, setObstacleAlert] = useState(false);
+  const [xPositionToPrint, setXPositionToPrint] = useState(0);
+  const [yPositionToPrint, setYPositionToPrint] = useState(0);
+
+  useEffect(() => {
+    const alertBox = document.getElementById("commands-alert");
+
+    commandAlert
+      ? (alertBox.className = "visible")
+      : (alertBox.className = "hidden");
+  }, [commandAlert]);
+
+  useEffect(() => {
+    const alertBox = document.getElementById("obstacle-alert");
+
+    obstacleAlert
+      ? (alertBox.className = "visible")
+      : (alertBox.className = "hidden");
+  }, [obstacleAlert]);
+
+  // useEffect(() => {
+  //   dispatch(moveRobot(xPositionToPrint, yPositionToPrint));
+  // }, [xPositionToPrint, yPositionToPrint]);
 
   function handleChange({ target }) {
+    setObstacleAlert(false);
+    testCommands(target.value) ? setCommandAlert(false) : setCommandAlert(true);
     setCommands(target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    testCommands(commands)
-      ? changeRobotPosition()
-      : alert(`Just "f", "l", "r" are accepted commands`);
+    changeRobotPosition();
   }
 
   function testCommands(commands) {
-    let commandsAccepted = new RegExp("[frl]", "gm");
-    return commandsAccepted.test(commands);
+    let incorrect = new RegExp("[^frl]", "gi");
+
+    const incorrectCommands = incorrect.test(commands);
+
+    if (commands === "" || !incorrectCommands) {
+      return true;
+    }
+    return false;
   }
   function changeRobotPosition() {
     let commandsArray = commands.split("");
     let temporalDirection = direction;
-    let temporalX = xCoord;
-    let temporalY = yCoord;
+    setXPositionToPrint(xCoord);
+    setYPositionToPrint(yCoord);
+    // let temporalX = xCoord;
+    // let temporalY = yCoord;
     commandsArray.forEach((command) => {
+      // setTimeout(() => {
       debugger;
-      dispatch(setPreviousRobot(temporalX, temporalY));
-      let { newPosition, newDirection } = robotMovement(
+      dispatch(setPreviousRobot(xPositionToPrint, yPositionToPrint));
+      let { newPosition, newDirection, status } = robotMovement(
         command,
-        temporalX,
-        temporalY,
+        // temporalX,
+        // temporalY,
+        xPositionToPrint,
+        yPositionToPrint,
         temporalDirection
       );
-      temporalX = newPosition.x;
-      temporalY = newPosition.y;
+      setXPositionToPrint(newPosition.x);
+      setYPositionToPrint(newPosition.y);
+      // temporalX = newPosition.x;
+      // temporalY = newPosition.y;
       temporalDirection = newDirection;
-      dispatch(moveRobot(newPosition.x, newPosition.y));
+
+      if (status === "obstacle") {
+        setObstacleAlert(true);
+      }
+      // debugger;
+
+      // dispatch(moveRobot(newPosition.x, newPosition.y));
       dispatch(changeDirection(newDirection));
+      // }, 2000);
     });
   }
   return (
     <div>
-      <input onChange={handleChange} />
-      <button type="submit" onClick={handleSubmit}>
+      <Input onChange={handleChange} />
+      <Button type="submit" onClick={handleSubmit}>
         Send Commands
-      </button>
+      </Button>
+      <Container id="commands-alert" className="visible">
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle mr={2}>It's not correct!</AlertTitle>
+          <AlertDescription>Just "f", "l", "r" are accepted</AlertDescription>
+          <CloseButton
+            onClick={() => setCommandAlert(false)}
+            position="absolute"
+            right="8px"
+            top="8px"
+          />
+        </Alert>
+      </Container>
+      <Container id="obstacle-alert" className="visible">
+        <Alert status="warning">
+          <AlertIcon />
+          <AlertTitle mr={2}>Ops!</AlertTitle>
+          <AlertDescription>
+            It seems you've found an obstacle before finishing your command line
+          </AlertDescription>
+          <CloseButton
+            onClick={() => setObstacleAlert(false)}
+            position="absolute"
+            right="8px"
+            top="8px"
+          />
+        </Alert>
+      </Container>
     </div>
   );
 };

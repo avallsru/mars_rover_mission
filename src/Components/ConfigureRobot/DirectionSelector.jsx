@@ -8,7 +8,6 @@ const DirectionSelector = () => {
 
   function handleChange({ target }) {
     dispatch(changeDirection(target.value));
-    console.log(target.value);
   }
   return (
     <Select placeholder="Select direction" onChange={handleChange}>

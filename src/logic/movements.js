@@ -1,8 +1,9 @@
 const obstacles = require("../Components/PlanetMap/obstacles");
 
-function robotMovement(command, xCoord, yCoord, direction) {
+function robotMovement(command, xCoord = 0, yCoord = 0, direction) {
   let robotPosition = { x: xCoord, y: yCoord };
   let newPosition;
+  let status = "movement";
 
   //define new robot coordinates
   if (
@@ -38,16 +39,18 @@ function robotMovement(command, xCoord, yCoord, direction) {
 
   if (boundaries) {
     alert("you're trying to go outside the map!");
-    return robotPosition;
+    // return robotPosition;
   } else if (obstacle) {
-    alert("ops!, you've found an obstacle");
-    return robotPosition;
+    // alert("ops!, you've found an obstacle");
+
+    newPosition = robotPosition;
+    status = "obstacle";
   }
 
   //change direction
   let newDirection = changeDirection(direction, command);
 
-  return { newPosition, newDirection };
+  return { newPosition, newDirection, status };
 }
 
 function checkObstacles({ x, y }) {

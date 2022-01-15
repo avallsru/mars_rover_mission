@@ -23,6 +23,7 @@ const Planet = () => {
     planetMap = [];
     defineObstacles();
     let robot = document.getElementById(`${xCoord},${yCoord}`);
+
     robot.className += " robot";
     switch (direction) {
       case "north": {

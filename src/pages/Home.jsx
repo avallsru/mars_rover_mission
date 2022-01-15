@@ -6,8 +6,8 @@ import DirectionSelector from "../Components/ConfigureRobot/DirectionSelector";
 const Home = () => {
   return (
     <div>
-      <CoordsInputs />
       <DirectionSelector />
+      <CoordsInputs />
     </div>
   );
 };
