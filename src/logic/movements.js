@@ -5,6 +5,8 @@ function robotMovement(command, xCoord = 0, yCoord = 0, direction) {
   let robotPosition = { x: xCoord, y: yCoord };
   let newPosition = {};
   let status = "movement";
+  xCoord = Number(xCoord);
+  yCoord = Number(yCoord);
 
   //define new robot coordinates
   let newDirection = defineDirection(direction, command);
@@ -37,9 +39,11 @@ function robotMovement(command, xCoord = 0, yCoord = 0, direction) {
   if (boundaries) {
     status = "boundaries";
     newPosition = robotPosition;
+    return { newPosition, newDirection, status };
   } else if (obstacle) {
     newPosition = robotPosition;
     status = "obstacle";
+    return { newPosition, newDirection, status };
   }
 
   return { newPosition, newDirection, status };

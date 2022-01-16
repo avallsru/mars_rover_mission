@@ -40,7 +40,7 @@ const CommandInput = () => {
       setAlertVisibility(true);
     }
 
-    setCommands(target.value);
+    setCommands(target.value.toLowerCase());
   }
 
   function handleSubmit(e) {

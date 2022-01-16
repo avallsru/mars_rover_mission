@@ -7,9 +7,17 @@ function changeRobotPosition(commandsStr, originalX, originalY, originalDir) {
   let nextXCoord = originalX;
   let nextYCoord = originalY;
   let finalStatus;
-  commandsArray.forEach((command) => {
+  for (let index = 0; index < commandsArray.length; index++) {
+    if (finalStatus === "obstacle" || finalStatus === "boundaries") {
+      return {
+        xToGo: nextXCoord,
+        yToGo: nextYCoord,
+        newDir: nextDir,
+        status: finalStatus,
+      };
+    }
     let { newPosition, newDirection, status } = robotMovement(
-      command,
+      commandsArray[index],
       nextXCoord,
       nextYCoord,
       nextDir
@@ -18,7 +26,8 @@ function changeRobotPosition(commandsStr, originalX, originalY, originalDir) {
     nextYCoord = newPosition.y;
     nextDir = newDirection;
     finalStatus = status;
-  });
+  }
+
   return {
     xToGo: nextXCoord,
     yToGo: nextYCoord,

@@ -15,6 +15,9 @@ function defineDirection(direction, command) {
       newIndex = directionIndex - 1;
       break;
     }
+    default: {
+      break;
+    }
   }
 
   if (newIndex > directionsArr.length - 1) {
