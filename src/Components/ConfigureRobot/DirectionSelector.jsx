@@ -11,13 +11,13 @@ const DirectionSelector = () => {
   const dispatch = useDispatch();
   const [alertVisibility, setAlertVisibility] = useState(false);
 
-  useEffect(() => {
-    const alertBox = document.getElementById("direction-alert");
+  // useEffect(() => {
+  //   const alertBox = document.getElementById("direction-alert");
 
-    alertVisibility
-      ? (alertBox.className = "visible")
-      : (alertBox.className = "hidden");
-  }, [alertVisibility]);
+  //   alertVisibility
+  //     ? (alertBox.className = "visible")
+  //     : (alertBox.className = "hidden");
+  // }, [alertVisibility]);
 
   function handleChange({ target }) {
     if (!testDirection(target.value)) {
@@ -27,16 +27,42 @@ const DirectionSelector = () => {
       dispatch(changeDirection(target.value));
     }
   }
+  function handleClick(e, direction) {
+    e.preventDefault();
+    dispatch(changeDirection(direction));
+  }
   return (
-    <div class="direction-container">
-      <p>direction (n, s, e, w): </p>
-      <input
-        id="x-input"
-        onChange={handleChange}
-        className="x-input coords-input"
-      />
-      <div id="direction-alert">
-        <CustomizedAlert type={"direction"} />
+    <div className="directions-container">
+      <h3>Directions</h3>
+      <div className="buttons-container">
+        <button
+          className="button-direction"
+          onClick={(e) => handleClick(e, "n")}
+        >
+          <div className="direction north"></div>
+          <p>north</p>
+        </button>
+        <button
+          className="button-direction"
+          onClick={(e) => handleClick(e, "e")}
+        >
+          <div className="direction east"></div>
+          <p>east</p>
+        </button>
+        <button
+          className="button-direction"
+          onClick={(e) => handleClick(e, "s")}
+        >
+          <div className="direction south"></div>
+          <p>south</p>
+        </button>
+        <button
+          className="button-direction"
+          onClick={(e) => handleClick(e, "w")}
+        >
+          <div className="direction west"></div>
+          <p>west</p>
+        </button>
       </div>
     </div>
   );

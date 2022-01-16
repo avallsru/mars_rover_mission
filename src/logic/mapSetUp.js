@@ -1,10 +1,11 @@
 const totalRows = 10;
 const totalColumns = 10;
 let planetMap = [];
-let mapToReturn = [];
+let mapToPrint = [];
 
-export default function mapSetUp() {
+export default function mapSetUp(kind) {
   planetMap = [];
+
   for (let indexColumn = 0; indexColumn < totalColumns; indexColumn++) {
     let row = [];
     for (let indexRow = totalRows - 1; indexRow >= 0; indexRow--) {
@@ -17,22 +18,25 @@ export default function mapSetUp() {
     }
     planetMap.push(row);
   }
-
-  mapToReturn = planetMap.map((row) => {
+  mapToPrint = planetMap.map((row) => {
     return (
       <div key={Math.random() * Date.now()}>
         {row.map((cell) => {
           return (
             <div
-              className="square"
+              className={kind === "empty" ? "square coords" : "square"}
               key={cell.coords}
               id={`${cell.x},${cell.y}`}
-            />
+            >
+              <span className="cell-coords">
+                {cell.x}, {cell.y}
+              </span>
+            </div>
           );
         })}
       </div>
     );
   });
 
-  return mapToReturn;
+  return mapToPrint;
 }

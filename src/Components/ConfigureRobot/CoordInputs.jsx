@@ -47,8 +47,9 @@ const CoordInputs = () => {
   }
 
   return (
-    <div class="coords-container">
-      <div class="concrete-coord">
+    <div className="coords-container">
+      <h3>Coords</h3>
+      <div className="concrete-coord">
         <p>x position: </p>
         <input
           id="x-input"
@@ -56,7 +57,7 @@ const CoordInputs = () => {
           className="x-input coords-input"
         />
       </div>
-      <div class="concrete-coord">
+      <div className="concrete-coord">
         <p>y position: </p>
         <input onChange={handleChange} className="y-input coords-input" />
       </div>
@@ -64,7 +65,7 @@ const CoordInputs = () => {
       <div id="coords-alert">
         <CustomizedAlert type={"coords"} />
       </div>
-      <button class="general-button" type="submit" onClick={handleSubmit}>
+      <button className="general-button" type="submit" onClick={handleSubmit}>
         Set Robot
       </button>
     </div>

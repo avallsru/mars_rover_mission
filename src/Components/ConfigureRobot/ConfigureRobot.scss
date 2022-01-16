@@ -1,20 +1,58 @@
 @import "../../styles/general.scss";
 
-.coords-container,
-.direction-container {
+.coords-container {
   display: flex;
   @include primaryFont;
   flex-direction: column;
   align-items: center;
-  
+}
+.directions-container {
+  h3 {
+    text-align: center;
+  }
+}
+.buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
 }
 .concrete-coord {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 15px;
+  :first-child {
+    margin-top: 20px;
+  }
 }
 
 .coords-input {
   width: 100px;
   text-align: center;
+}
+
+.direction {
+  width: 0px;
+  height: 0px;
+  margin: 10px; 
+}
+
+.button-direction {
+  @include primaryFont;
+  padding: 15px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  &:focus {
+    background-color: $retro_green;
+    color: black
+  }
+  &:hover {
+    border: 1px solid $retro_green;
+    
+  }
 }

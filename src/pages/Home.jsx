@@ -5,6 +5,7 @@ import CoordsInputs from "../Components/ConfigureRobot/CoordInputs";
 import DirectionSelector from "../Components/ConfigureRobot/DirectionSelector";
 
 import "./Home.scss";
+import EmptyPlanet from "../Components/PlanetMap/EmptyPlanet";
 
 const Home = () => {
   return (
@@ -24,10 +25,11 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <div>
+      <div className="setup-container">
         <DirectionSelector />
         <CoordsInputs />
       </div>
+      <EmptyPlanet />
     </div>
   );
 };
