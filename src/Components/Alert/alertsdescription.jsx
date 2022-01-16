@@ -2,8 +2,8 @@ export const alerts = {
   coords: {
     id: "coords-alert",
     status: "error",
-    title: "It's not correct!",
-    description: "Introduce a number between 0 and 9",
+    title: "Error!",
+    description: "Just numbers between 0 and 9 are allowed",
   },
   commands: {
     id: "commands-alert",

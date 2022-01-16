@@ -44,6 +44,9 @@
   &.obstacle {
     background-color: $retro_green;
   }
+  .cell-coords {
+    display: none;
+  }
 }
 
 .north,

@@ -1,0 +1,33 @@
+@import "../styles/general.scss";
+
+.controller-general-container {
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+.map-container {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 30px;
+
+}
+
+.instructions-container {
+  width: 270px;
+  padding: 20px;
+  justify-self: center;
+  align-self: center;
+  border: 1px solid $retro_green;
+  border-radius: 10px;
+  font-size: 0.7em;
+  text-align: justify;
+  h3 {
+    text-align: center;
+  }
+  .control {
+    margin-left: 10px;
+  }
+}

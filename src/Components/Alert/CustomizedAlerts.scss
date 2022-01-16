@@ -1,13 +1,15 @@
 @import '../../styles/general.scss';
 
 .alerts-container {
-  width: 650px;
-  padding: 20px 10px;
+  width: 100%;
+  padding: 20px 5px;
+  margin-bottom: 30px;
   border: 1px solid $retro_green;
   border-radius: 10px;  
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.7rem;
   // margin: 30px;
   background-color: $retro_green;
 }
@@ -26,7 +28,7 @@
 }
 
 .warning-icon {
-  height: 50px;
+  height: 40px;
   width: auto;
   color: black;
 }

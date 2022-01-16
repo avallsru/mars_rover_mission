@@ -7,7 +7,7 @@ import defineObstacles from "../../logic/defineObstacles";
 import "./planet.scss";
 
 const Planet = () => {
-  let { mapToPrint } = mapSetUp();
+  let mapToPrint = mapSetUp();
   const { direction, xCoord, yCoord } = useSelector(
     (store) => store.robotsReducers
   );
