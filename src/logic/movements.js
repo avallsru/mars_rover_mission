@@ -11,19 +11,19 @@ function robotMovement(command, xCoord = 0, yCoord = 0, direction) {
   //define new robot coordinates
   let newDirection = defineDirection(direction, command);
   switch (newDirection) {
-    case "north": {
+    case "n": {
       newPosition = { x: xCoord, y: yCoord + 1 };
       break;
     }
-    case "east": {
+    case "e": {
       newPosition = { x: xCoord + 1, y: yCoord };
       break;
     }
-    case "west": {
+    case "w": {
       newPosition = { x: xCoord - 1, y: yCoord };
       break;
     }
-    case "south": {
+    case "s": {
       newPosition = { x: xCoord, y: yCoord - 1 };
       break;
     }

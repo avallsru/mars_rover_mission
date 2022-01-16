@@ -8,7 +8,7 @@ export const alerts = {
   commands: {
     id: "commands-alert",
     status: "error",
-    title: "It's not correct!",
+    title: "Error!",
     description: `Just "f", "l", "r" are accepted`,
   },
   obstacle: {
@@ -24,5 +24,11 @@ export const alerts = {
     title: "Ops!",
     description:
       " It seems you've tried to go outside the map before finishing your command line",
+  },
+  direction: {
+    id: "direction-alert",
+    status: "error",
+    title: "Be careful!",
+    description: "Use just n/s/e/w to define the direction",
   },
 };

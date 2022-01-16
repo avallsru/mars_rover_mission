@@ -1,47 +1,48 @@
-
+@import '../../styles/general.scss';
 
 .planet {
   margin: 10% 20%;
   display: grid;
-  grid-template-columns: repeat(10, 20px );
-  grid-template-rows: repeat(10, 20px );
-  
-  
+  grid-template-columns: repeat(10, 30px );
+  grid-template-rows: repeat(10, 30px ); 
+}
+
+.commands-container {
+  @include primaryFont;
+}
+
+.commands-input {
+  padding: 15px;
 }
 
 .square,
 .obstacle,
-.robot,
-.test {
-  height: 20px;
-  width: 20px;
-  border: 1px solid black;
+.robot {
+  height: 30px;
+  width: 30px;
+  border: 1px solid $retro_green;
+  background-color: black;
   
   &.obstacle {
-    background-color: blue;
+    background-color: $retro_green;
   }
   &.robot {
     width: 0; 
     height: 0; 
-    &.north {
-      border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 21px solid purple;
-    }
+    &.north,
     &.south {
-      border-left: 10px solid transparent;
+      // padding: 2px;
+    margin: 2px 5px;
+    border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 21px solid purple;
+    border-bottom: 25px solid purple;
     }
-    &.east {
-      border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 21px solid purple;
-    }
+    &.east,
     &.west {
-      border-top: 10px solid transparent;
+    margin: 5px 2px;
+    border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 21px solid purple;
-    } 
+    border-left: 25px solid purple;
+    }
   }  
 }

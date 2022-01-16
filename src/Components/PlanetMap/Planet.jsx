@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { GiBubbleField } from "react-icons/gi";
 
 import mapSetUp from "../../logic/mapSetUp";
 
@@ -19,19 +20,19 @@ const Planet = () => {
 
     robot.className += " robot";
     switch (direction) {
-      case "north": {
+      case "n": {
         robot.className += " north";
         break;
       }
-      case "south": {
+      case "s": {
         robot.className += " south";
         break;
       }
-      case "east": {
+      case "e": {
         robot.className += " east";
         break;
       }
-      case "west": {
+      case "w": {
         robot.className += " west";
         break;
       }
@@ -39,6 +40,12 @@ const Planet = () => {
         break;
       }
     }
+
+    return (
+      <div>
+        <GiBubbleField />
+      </div>
+    );
   }, [xCoord, yCoord, direction]);
 
   function defineObstacles() {

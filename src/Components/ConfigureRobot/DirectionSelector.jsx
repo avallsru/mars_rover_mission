@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Select } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { changeDirection } from "../../redux/actions/robotActions";
 
+import "./ConfigureRobot.scss";
+import testDirection from "../../logic/testDirection";
+import CustomizedAlert from "../Alert/CustomizedAlert";
+
 const DirectionSelector = () => {
   const dispatch = useDispatch();
+  const [alertVisibility, setAlertVisibility] = useState(false);
+
+  useEffect(() => {
+    const alertBox = document.getElementById("direction-alert");
+
+    alertVisibility
+      ? (alertBox.className = "visible")
+      : (alertBox.className = "hidden");
+  }, [alertVisibility]);
 
   function handleChange({ target }) {
-    dispatch(changeDirection(target.value));
+    if (!testDirection(target.value)) {
+      setAlertVisibility(true);
+    } else {
+      setAlertVisibility(false);
+      dispatch(changeDirection(target.value));
+    }
   }
   return (
-    <Select placeholder="Select direction" onChange={handleChange}>
-      <option value="north">North</option>
-      <option value="south">South</option>
-      <option value="east">East</option>
-      <option value="west">West</option>
-    </Select>
+    <div class="direction-container">
+      <p>direction (n, s, e, w): </p>
+      <input
+        id="x-input"
+        onChange={handleChange}
+        className="x-input coords-input"
+      />
+      <div id="direction-alert">
+        <CustomizedAlert type={"direction"} />
+      </div>
+    </div>
   );
 };
 

@@ -1,6 +1,30 @@
+@import '../../styles/general.scss';
+
+.alerts-container {
+  padding: 20px 10px;
+  border: 1px solid $retro_green;
+  border-radius: 10px;  
+  display: flex;
+  align-items: center;
+  margin: 30px;
+  background-color: $retro_green;
+}
+.alert-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  color: black
+}
+
 .visible {
   display:block
 }
 .hidden {
   display: none;
+}
+
+.warning-icon {
+  height: 50px;
+  width: auto;
+  color: black;
 }

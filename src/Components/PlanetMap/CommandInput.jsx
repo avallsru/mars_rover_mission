@@ -35,6 +35,18 @@ const CommandInput = () => {
   function handleChange({ target }) {
     if (testCommands(target.value)) {
       setAlertVisibility(false);
+      // const { xToGo, yToGo, newDir, status } = changeRobotPosition(
+      //   target.value,
+      //   xCoord,
+      //   yCoord,
+      //   direction
+      // );
+      // if (status !== "movement") {
+      //   setAlertVisibility(true);
+      //   setAlertType(status);
+      // }
+      // dispatch(moveRobot(xToGo, yToGo));
+      // dispatch(changeDirection(newDir));
     } else {
       setAlertType("commands");
       setAlertVisibility(true);
@@ -60,12 +72,11 @@ const CommandInput = () => {
   }
 
   return (
-    <div>
-      <Input onChange={handleChange} />
-      <Button type="submit" onClick={handleSubmit}>
+    <div className="commands-container">
+      <input className="commands-input" onChange={handleChange} />
+      <button className="general-button" type="submit" onClick={handleSubmit}>
         Send Commands
-      </Button>
-
+      </button>
       <Container id="alert">
         <CustomizedAlert type={alertType} />
       </Container>

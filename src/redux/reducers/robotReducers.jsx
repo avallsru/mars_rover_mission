@@ -8,7 +8,7 @@ import {
 const defaultRobot = {
   xCoord: 0,
   yCoord: 0,
-  direction: "north",
+  direction: "n",
   previousX: 0,
   previousY: 0,
 };

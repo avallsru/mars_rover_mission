@@ -8,6 +8,7 @@ import { setInitialCoords } from "../../redux/actions/robotActions";
 import CustomizedAlert from "../Alert/CustomizedAlert";
 
 import "../Alert/CustomizedAlerts.scss";
+import "./ConfigureRobot.scss";
 
 let totalLines = 10;
 const CoordInputs = () => {
@@ -29,9 +30,9 @@ const CoordInputs = () => {
     const coordNumber = Number(target.value);
     if (coordNumber >= 0 && coordNumber < totalLines) {
       setAlertVisibility(false);
-      if (target.className.includes("xInput")) {
+      if (target.className.includes("x-input")) {
         setX(target.value);
-      } else if (target.className.includes("yInput")) {
+      } else if (target.className.includes("y-input")) {
         setY(target.value);
       }
     } else {
@@ -46,16 +47,26 @@ const CoordInputs = () => {
   }
 
   return (
-    <div>
-      <Input id="x-input" onChange={handleChange} className="xInput" />
-      <Input onChange={handleChange} className="yInput" />
+    <div class="coords-container">
+      <div class="concrete-coord">
+        <p>x position: </p>
+        <input
+          id="x-input"
+          onChange={handleChange}
+          className="x-input coords-input"
+        />
+      </div>
+      <div class="concrete-coord">
+        <p>y position: </p>
+        <input onChange={handleChange} className="y-input coords-input" />
+      </div>
 
-      <Container id="coords-alert">
+      <div id="coords-alert">
         <CustomizedAlert type={"coords"} />
-      </Container>
-      <Button type="submit" onClick={handleSubmit}>
+      </div>
+      <button class="general-button" type="submit" onClick={handleSubmit}>
         Set Robot
-      </Button>
+      </button>
     </div>
   );
 };

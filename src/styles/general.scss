@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+//COLORS
+$retro_green: rgb(82, 190, 7);
+
+//FONTS
+@mixin primaryFont {
+  font-family: 'Press Start 2P';
+  color: $retro_green
+}
+
+body {
+  @include primaryFont;
+  background-color: black;
+}
+
+input {
+  @include primaryFont;
+  background-color: black;
+  border: 2px solid $retro_green;
+  border-radius: 10px;
+  color: $retro_green;
+  &:focus {
+    background-color: $retro_green;
+    color: black;
+    border: 2px solid $retro_green;
+  }
+}
+
+h3 {
+  margin: 15px 0;
+}
+
+p {
+  margin: 0
+}
+
+.general-button {
+  @include primaryFont;
+  padding: 10px;
+  border: 2px solid $retro_green;
+  border-radius: 10px;
+  background-color: black;
+  &:hover, &:focus {
+    background-color: $retro_green;
+    color: black;
+  }
+}
+
+
+
+
+
+// caret-color::after $retro_green;

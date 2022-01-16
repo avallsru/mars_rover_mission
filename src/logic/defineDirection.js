@@ -1,4 +1,4 @@
-const directionsArr = ["north", "east", "south", "west"];
+const directionsArr = ["n", "e", "s", "w"];
 
 function defineDirection(direction, command) {
   const directionIndex = directionsArr.indexOf(direction);

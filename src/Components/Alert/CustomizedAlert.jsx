@@ -1,27 +1,22 @@
 import React from "react";
-
-import {
-  Container,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { IoIosWarning } from "react-icons/io";
 
 import { alerts } from "./alertsdescription";
+
+import "./CustomizedAlerts.scss";
 
 const CustomizedAlert = ({ type }) => {
   const selectedAlert = alerts[type];
 
   if (type)
     return (
-      <Container>
-        <Alert status={selectedAlert.status}>
-          <AlertIcon />
-          <AlertTitle mr={2}>{selectedAlert.title}</AlertTitle>
-          <AlertDescription>{selectedAlert.description}</AlertDescription>
-        </Alert>
-      </Container>
+      <div className="alerts-container">
+        <IoIosWarning className="warning-icon" />
+        <div className="alert-text">
+          <h3>{selectedAlert.title}</h3>
+          <p>{selectedAlert.description}</p>
+        </div>
+      </div>
     );
   return <div></div>;
 };
