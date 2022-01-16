@@ -1,12 +1,14 @@
 @import '../../styles/general.scss';
 
 .alerts-container {
+  width: 650px;
   padding: 20px 10px;
   border: 1px solid $retro_green;
   border-radius: 10px;  
   display: flex;
   align-items: center;
-  margin: 30px;
+  justify-content: center;
+  // margin: 30px;
   background-color: $retro_green;
 }
 .alert-text {

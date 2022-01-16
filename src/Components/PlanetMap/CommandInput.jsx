@@ -57,6 +57,7 @@ const CommandInput = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const { xToGo, yToGo, newDir, status } = changeRobotPosition(
       commands,
       xCoord,
@@ -67,19 +68,31 @@ const CommandInput = () => {
       setAlertVisibility(true);
       setAlertType(status);
     }
+    setCommands("");
+    let commandsInput = document.getElementById("commands-line");
+    commandsInput.value = "";
+    commandsInput.focus();
+
     dispatch(moveRobot(xToGo, yToGo));
     dispatch(changeDirection(newDir));
   }
 
   return (
     <div className="commands-container">
-      <input className="commands-input" onChange={handleChange} />
-      <button className="general-button" type="submit" onClick={handleSubmit}>
-        Send Commands
-      </button>
-      <Container id="alert">
-        <CustomizedAlert type={alertType} />
-      </Container>
+      <div className="element-container">
+        <input
+          id="commands-line"
+          className="commands-input"
+          onChange={handleChange}
+        />
+        <button className="general-button" type="submit" onClick={handleSubmit}>
+          Send Commands
+        </button>
+      </div>
+
+      <div className="element-container" id="alert">
+        <CustomizedAlert id="alert" type={alertType} />
+      </div>
     </div>
   );
 };
