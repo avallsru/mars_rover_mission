@@ -1,32 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { Select } from "@chakra-ui/react";
+import React from "react";
 import { useDispatch } from "react-redux";
+
 import { changeDirection } from "../../redux/actions/robotActions";
 
 import "./ConfigureRobot.scss";
-import testDirection from "../../logic/testDirection";
-import CustomizedAlert from "../Alert/CustomizedAlert";
+import directionsArr from "./directions";
 
 const DirectionSelector = () => {
   const dispatch = useDispatch();
-  const [alertVisibility, setAlertVisibility] = useState(false);
 
-  // useEffect(() => {
-  //   const alertBox = document.getElementById("direction-alert");
+  const directionsButtons = directionsArr.map((directionDetail) => {
+    return (
+      <button
+        className="button-direction"
+        onClick={(e) => handleClick(e, directionDetail.functionName)}
+        key={directionDetail.functionName}
+      >
+        <div className={directionDetail.className}></div>
+        <p>{directionDetail.buttonName}</p>
+      </button>
+    );
+  });
 
-  //   alertVisibility
-  //     ? (alertBox.className = "visible")
-  //     : (alertBox.className = "hidden");
-  // }, [alertVisibility]);
-
-  function handleChange({ target }) {
-    if (!testDirection(target.value)) {
-      setAlertVisibility(true);
-    } else {
-      setAlertVisibility(false);
-      dispatch(changeDirection(target.value));
-    }
-  }
   function handleClick(e, direction) {
     e.preventDefault();
     dispatch(changeDirection(direction));
@@ -34,36 +29,8 @@ const DirectionSelector = () => {
   return (
     <div className="directions-container">
       <h3>Directions</h3>
-      <div className="buttons-container">
-        <button
-          className="button-direction"
-          onClick={(e) => handleClick(e, "n")}
-        >
-          <div className="direction north"></div>
-          <p>north</p>
-        </button>
-        <button
-          className="button-direction"
-          onClick={(e) => handleClick(e, "e")}
-        >
-          <div className="direction east"></div>
-          <p>east</p>
-        </button>
-        <button
-          className="button-direction"
-          onClick={(e) => handleClick(e, "s")}
-        >
-          <div className="direction south"></div>
-          <p>south</p>
-        </button>
-        <button
-          className="button-direction"
-          onClick={(e) => handleClick(e, "w")}
-        >
-          <div className="direction west"></div>
-          <p>west</p>
-        </button>
-      </div>
+
+      <div className="buttons-container">{directionsButtons}</div>
     </div>
   );
 };

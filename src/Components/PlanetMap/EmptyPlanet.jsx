@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import mapSetUp from "../../logic/mapSetUp";
 import defineObstacles from "../../logic/defineObstacles";

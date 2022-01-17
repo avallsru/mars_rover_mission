@@ -5,6 +5,12 @@ export const alerts = {
     title: "Error!",
     description: "Just numbers between 0 and 9 are allowed",
   },
+  obstacleCoords: {
+    id: "obstacle-coords",
+    status: "error",
+    title: "Ops!",
+    description: "Please, introduce coords that don't have an obstacle",
+  },
   commands: {
     id: "commands-alert",
     status: "error",

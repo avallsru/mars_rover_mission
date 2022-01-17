@@ -4,7 +4,6 @@ import Planet from "../Components/PlanetMap/Planet.jsx";
 import CommandInput from "../Components/PlanetMap/CommandInput.jsx";
 
 import "./RoverController.scss";
-import { list } from "@chakra-ui/react";
 
 const RoverController = () => {
   return (

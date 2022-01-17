@@ -11,20 +11,26 @@
 .square.coords {
   .cell-coords{
     visibility: hidden;
+    display: block;
     position:absolute;
     font-size: 0.8em;
   }
   &:hover {
     background-color: purple;
     .cell-coords{
-      background-color: $retro_green;
+      
       visibility: visible;
-      position:absolute;
-      // font-size: 0.8em;
+      position:relative;
+      top: -25px;
+      left: 15px;
+      width: 70px;
+      height: auto;
+      font-size: 1rem;
       color: black;
       padding: 5px;
-      border-radius: 10px;;
-      
+      border-radius: 10px;
+      background-color: $retro_green;
+      text-align: center;
     }
   }
 }

@@ -25,7 +25,7 @@ export default function mapSetUp(kind) {
           return (
             <div
               className={kind === "empty" ? "square coords" : "square"}
-              key={cell.coords}
+              key={Math.random() * Date.now()}
               id={`${cell.x},${cell.y}`}
             >
               <span className="cell-coords">

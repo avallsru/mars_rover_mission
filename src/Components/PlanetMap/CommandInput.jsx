@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Input, Button } from "@chakra-ui/react";
 
-import {
-  changeDirection,
-  moveRobot,
-  setPreviousRobot,
-} from "../../redux/actions/robotActions";
+import { changeDirection, moveRobot } from "../../redux/actions/robotActions";
 
 import CustomizedAlert from "../Alert/CustomizedAlert";
 
@@ -22,10 +17,11 @@ const CommandInput = () => {
   );
   const [commands, setCommands] = useState("");
   const [alertVisibility, setAlertVisibility] = useState(false);
-  const [alertType, setAlertType] = useState("");
+  const [alertType, setAlertType] = useState("commands");
+  const [alertId, setAlertId] = useState("commands-alert");
 
   useEffect(() => {
-    const alertBox = document.getElementById("alert");
+    const alertBox = document.getElementById(alertId);
 
     alertVisibility
       ? (alertBox.className = "visible")
@@ -35,21 +31,10 @@ const CommandInput = () => {
   function handleChange({ target }) {
     if (testCommands(target.value)) {
       setAlertVisibility(false);
-      // const { xToGo, yToGo, newDir, status } = changeRobotPosition(
-      //   target.value,
-      //   xCoord,
-      //   yCoord,
-      //   direction
-      // );
-      // if (status !== "movement") {
-      //   setAlertVisibility(true);
-      //   setAlertType(status);
-      // }
-      // dispatch(moveRobot(xToGo, yToGo));
-      // dispatch(changeDirection(newDir));
     } else {
       setAlertType("commands");
       setAlertVisibility(true);
+      setAlertId("commands-alert");
     }
 
     setCommands(target.value.toLowerCase());
@@ -84,14 +69,15 @@ const CommandInput = () => {
           id="commands-line"
           className="commands-input"
           onChange={handleChange}
+          autoFocus
         />
         <button className="general-button" type="submit" onClick={handleSubmit}>
           Send Commands
         </button>
       </div>
 
-      <div className="element-container" id="alert">
-        <CustomizedAlert id="alert" type={alertType} />
+      <div className="element-container" id={alertId}>
+        <CustomizedAlert type={alertType} />
       </div>
     </div>
   );

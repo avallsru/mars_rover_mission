@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { Container, Input, Button } from "@chakra-ui/react";
-
 import { setInitialCoords } from "../../redux/actions/robotActions";
 import CustomizedAlert from "../Alert/CustomizedAlert";
 
 import "../Alert/CustomizedAlerts.scss";
 import "./ConfigureRobot.scss";
+
+const checkObstaclesPosition = require("../../logic/checkObstaclesPosition");
 
 let totalLines = 10;
 const CoordInputs = () => {
@@ -17,14 +17,16 @@ const CoordInputs = () => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [alertVisibility, setAlertVisibility] = useState(false);
+  const [alertId, setAlertId] = useState("coords-alert");
+  const [alertType, setAlertType] = useState("coords");
 
   useEffect(() => {
-    const alertBox = document.getElementById("coords-alert");
+    const alertBox = document.getElementById(alertId);
 
     alertVisibility
       ? (alertBox.className = "visible")
       : (alertBox.className = "hidden");
-  }, [alertVisibility]);
+  }, [alertVisibility, alertId]);
 
   function handleChange({ target }) {
     const coordNumber = Number(target.value);
@@ -37,13 +39,23 @@ const CoordInputs = () => {
       }
     } else {
       setAlertVisibility(true);
+      setAlertId("coords-alert");
+      setAlertType("coords");
     }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(setInitialCoords(x, y));
-    navigate("/controller");
+    const obstacle = checkObstaclesPosition(x, y);
+    if (obstacle) {
+      setAlertVisibility(true);
+      setAlertId("obstacle-coords");
+      setAlertType("obstacleCoords");
+      // return;
+    } else {
+      dispatch(setInitialCoords(x, y));
+      navigate("/controller");
+    }
   }
 
   return (
@@ -62,8 +74,8 @@ const CoordInputs = () => {
         <input onChange={handleChange} className="y-input coords-input" />
       </div>
 
-      <div id="coords-alert">
-        <CustomizedAlert type={"coords"} />
+      <div id={alertId}>
+        <CustomizedAlert type={alertType} />
       </div>
       <button className="general-button" type="submit" onClick={handleSubmit}>
         Set Robot
