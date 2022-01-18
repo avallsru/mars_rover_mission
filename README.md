@@ -19,12 +19,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Examples
 For going quicklier, we let you an example for checking different circumstances:
-####Setting up the robot
+
+#### Setting up the robot
 - Direction: `north`
 - Initial coords: `{x: 3, y: 2}`
 - Initial coords with an obstacle: `{x: 1, y: 2}`
 
-####Commands
+#### Commands
 - Movement: `ffrfflff`
 - Obstacle: *(from the previous point)* `rlffrlf`
 - Boundaries: *(from the previous point)* `rfflrfl`
